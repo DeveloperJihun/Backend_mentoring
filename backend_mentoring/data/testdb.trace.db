@@ -2207,3 +2207,13 @@ JOIN INFORMATION_SCHEMA.CONSTRAINT_COLUMNS COLS
   ON CONS.CONSTRAINT_NAME = COLS.CONSTRAINT_NAME
 WHERE CONS.TABLE_NAME = 'USERS'
   AND COLS.COLUMN_NAME = 'EMAIL' [42102-232]
+2025-09-28 02:11:43.079031+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM ARTICLES \000d\000aUSERS [*]USERS"; SQL statement:
+SELECT * FROM ARTICLES 
+USERS USERS [42000-232]
+2025-09-28 03:37:13.724083+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM [*]user"; expected "identifier"; SQL statement:
+SELECT * FROM user [42001-232]
+2025-09-28 03:37:16.232182+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM [*]USER"; expected "identifier"; SQL statement:
+SELECT * FROM USER [42001-232]
