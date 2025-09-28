@@ -13,8 +13,7 @@ public class GlobalExceptionHandler {
 
     // 예: 잘못된 요청 (IllegalArgumentException)
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException e,
-                                                               HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException e, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.name(),
@@ -26,8 +25,7 @@ public class GlobalExceptionHandler {
 
     // 예: 기본 처리 (그 외 모든 예외)
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(Exception e,
-                                                         HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleException(Exception e, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.INTERNAL_SERVER_ERROR.name(),

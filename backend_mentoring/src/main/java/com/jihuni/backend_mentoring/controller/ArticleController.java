@@ -2,7 +2,6 @@ package com.jihuni.backend_mentoring.controller;
 
 import com.jihuni.backend_mentoring.dto.ArticleRequestDto;
 import com.jihuni.backend_mentoring.dto.ArticleResponseDto;
-import com.jihuni.backend_mentoring.entity.Article;
 import com.jihuni.backend_mentoring.service.ArticleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +15,16 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @PostMapping("/article")
-    public ResponseEntity<?> createArticle(@Valid @RequestBody ArticleRequestDto requestDto) {
-        try {
-            Article saved = articleService.createArticle(requestDto);
-            return ResponseEntity.ok(ArticleResponseDto.fromEntity(saved));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(
-                    java.util.Map.of("error", e.getMessage())
-            );
-        }
+    public ResponseEntity<ArticleResponseDto> createArticle(@Valid @RequestBody ArticleRequestDto requestDto) {
+        ArticleResponseDto responseDto = articleService.createArticle(requestDto);
+        return ResponseEntity.ok(responseDto);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ArticleResponseDto> updateArticle(
+            @PathVariable Long id,
+            @Valid @RequestBody ArticleRequestDto requestDto) {
+
+        ArticleResponseDto responseDto = articleService.updateArticle(id, requestDto);
+        return ResponseEntity.ok(responseDto);
     }
 }
