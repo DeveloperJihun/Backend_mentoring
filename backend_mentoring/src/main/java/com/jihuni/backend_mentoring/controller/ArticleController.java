@@ -10,20 +10,24 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/article")
 public class ArticleController {
 
     private final ArticleService articleService;
 
-    @PostMapping("/article")
-    public ResponseEntity<ArticleResponseDto> createArticle(@Valid @RequestBody ArticleRequestDto requestDto) {
+    // 게시글 작성: POST /article
+    @PostMapping
+    public ResponseEntity<ArticleResponseDto> createArticle(
+            @Valid @RequestBody ArticleRequestDto requestDto) {
         ArticleResponseDto responseDto = articleService.createArticle(requestDto);
         return ResponseEntity.ok(responseDto);
     }
+
+    // 게시글 수정: PUT /article/update/{id}
     @PutMapping("/update/{id}")
     public ResponseEntity<ArticleResponseDto> updateArticle(
             @PathVariable Long id,
             @Valid @RequestBody ArticleRequestDto requestDto) {
-
         ArticleResponseDto responseDto = articleService.updateArticle(id, requestDto);
         return ResponseEntity.ok(responseDto);
     }
