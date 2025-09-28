@@ -16,12 +16,24 @@ public class CommentController {
     private final CommentService commentService;
 
     // 댓글 작성
-    @PostMapping("/{id}/comments")
+    @PostMapping("/{articleId}/comments")
     public ResponseEntity<CommentResponseDto> createComment(
-            @PathVariable Long id,
+            @PathVariable Long articleId,
             @Valid @RequestBody CommentRequestDto requestDto) {
 
-        CommentResponseDto responseDto = commentService.createComment(id, requestDto);
+        CommentResponseDto responseDto = commentService.createComment(articleId, requestDto);
         return ResponseEntity.ok(responseDto);
     }
+
+    // 댓글 수정
+    @PutMapping("/{articleId}/comments/{commentId}/update")
+    public ResponseEntity<CommentResponseDto> updateComment(
+            @PathVariable Long articleId,
+            @PathVariable Long commentId,
+            @Valid @RequestBody CommentRequestDto requestDto) {
+
+        CommentResponseDto responseDto = commentService.updateComment(articleId, commentId, requestDto);
+        return ResponseEntity.ok(responseDto);
+    }
+
 }
