@@ -1,5 +1,8 @@
 package com.jihuni.backend_mentoring.entity;
 
+import java.util.ArrayList;
+import java.util.List;  
+import com.jihuni.backend_mentoring.entity.Comment; 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,4 +28,8 @@ public class Article {
 
     @Column(nullable = false)
     private String content;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
 }
