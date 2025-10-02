@@ -31,4 +31,15 @@ public class ArticleController {
         ArticleResponseDto responseDto = articleService.updateArticle(id, requestDto);
         return ResponseEntity.ok(responseDto);
     }
+
+    // 게시글 삭제: DELETE /article/delete/{id}
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteArticle(
+            @PathVariable Long id,
+            @RequestBody ArticleRequestDto requestDto) {
+
+        articleService.deleteArticle(id, requestDto);
+        return ResponseEntity.ok("게시글 및 댓글이 삭제되었습니다.");
+    }
+
 }

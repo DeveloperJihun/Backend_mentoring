@@ -66,6 +66,29 @@ public class ArticleService {
         return ArticleResponseDto.fromEntity(article);
     }
 
+    @Transactional
+    public void deleteArticle(Long id, ArticleRequestDto dto) {
+        // 1. 게시글 조회
+        Article article = articleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+
+        // 2. 사용자 조회
+        User user = userRepository.findByEmail(dto.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다."));
+
+        // 3. 비밀번호 검증
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        // 4. 본인 글 확인 (email 비교)
+        if (!article.getEmail().equals(user.getEmail())) {
+            throw new IllegalArgumentException("자신의 게시글만 삭제할 수 있습니다.");
+        }
+
+        // 5. 삭제 (댓글은 cascade = REMOVE 덕분에 자동 삭제)
+        articleRepository.delete(article);
+    }
 
     
 }
