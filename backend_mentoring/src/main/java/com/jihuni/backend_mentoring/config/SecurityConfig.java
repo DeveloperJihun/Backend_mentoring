@@ -10,24 +10,25 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable()) // ✅ 전체 CSRF 비활성화
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/signup", "/h2-console/**", "/article", "/update", "/article/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form.disable())
-            .httpBasic(basic -> basic.disable());
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+        .csrf(csrf -> csrf.disable()) // ✅ 전체 CSRF 비활성화
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/", "/signup", "/h2-console/**", "/article", "/update", "/article/**")
+            .permitAll()
+            .anyRequest().authenticated()
+        )
+        .formLogin(form -> form.disable())
+        .httpBasic(basic -> basic.disable());
 
-        http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
+    http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
-        return http.build();
-    }
+    return http.build();
+  }
 }

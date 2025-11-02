@@ -7,15 +7,16 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CommentResponseDto {
-    private Long commentId;
-    private String email;
-    private String content;
 
-    public static CommentResponseDto fromEntity(Comment comment) {
-        return new CommentResponseDto(
-                comment.getCommentId(),
-                comment.getEmail(),
-                comment.getContent()
-        );
-    }
+  private Long commentId;
+  private String email;
+  private String content;
+
+  public static CommentResponseDto fromEntity(Comment comment) {
+    return new CommentResponseDto(
+        comment.getCommentId(),
+        comment.getEmail(),
+        comment.getContent()
+    );
+  }
 }

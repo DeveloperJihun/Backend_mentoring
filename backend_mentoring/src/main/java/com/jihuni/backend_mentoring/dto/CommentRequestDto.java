@@ -8,12 +8,12 @@ import lombok.Setter;
 @Setter
 public class CommentRequestDto {
 
-    @NotBlank(message = "이메일은 비워둘 수 없습니다.")
-    private String email;
+  @NotBlank(message = "이메일은 비워둘 수 없습니다.")
+  private String email;
 
-    @NotBlank(message = "비밀번호는 비워둘 수 없습니다.")
-    private String password;
+  @NotBlank(message = "비밀번호는 비워둘 수 없습니다.")
+  private String password;
 
-    @NotBlank(message = "내용은 비워둘 수 없습니다.")
-    private String content;
+  @NotBlank(message = "내용은 비워둘 수 없습니다.")
+  private String content;
 }

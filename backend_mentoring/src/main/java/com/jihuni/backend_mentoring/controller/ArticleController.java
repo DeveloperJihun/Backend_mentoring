@@ -6,29 +6,34 @@ import com.jihuni.backend_mentoring.service.ArticleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/article")
 public class ArticleController {
 
-    private final ArticleService articleService;
+  private final ArticleService articleService;
 
-    // 게시글 작성: POST /article
-    @PostMapping
-    public ResponseEntity<ArticleResponseDto> createArticle(
-            @Valid @RequestBody ArticleRequestDto requestDto) {
-        ArticleResponseDto responseDto = articleService.createArticle(requestDto);
-        return ResponseEntity.ok(responseDto);
-    }
+  // 게시글 작성: POST /article
+  @PostMapping
+  public ResponseEntity<ArticleResponseDto> createArticle(
+      @Valid @RequestBody ArticleRequestDto requestDto) {
+    ArticleResponseDto responseDto = articleService.createArticle(requestDto);
+    return ResponseEntity.ok(responseDto);
+  }
 
-    // 게시글 수정: PUT /article/update/{id}
-    @PutMapping("/update/{id}")
-    public ResponseEntity<ArticleResponseDto> updateArticle(
-            @PathVariable Long id,
-            @Valid @RequestBody ArticleRequestDto requestDto) {
-        ArticleResponseDto responseDto = articleService.updateArticle(id, requestDto);
-        return ResponseEntity.ok(responseDto);
-    }
+  // 게시글 수정: PUT /article/update/{id}
+  @PutMapping("/update/{id}")
+  public ResponseEntity<ArticleResponseDto> updateArticle(
+      @PathVariable Long id,
+      @Valid @RequestBody ArticleRequestDto requestDto) {
+    ArticleResponseDto responseDto = articleService.updateArticle(id, requestDto);
+    return ResponseEntity.ok(responseDto);
+  }
 }

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BackendMentoringApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BackendMentoringApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(BackendMentoringApplication.class, args);
+  }
 
 }

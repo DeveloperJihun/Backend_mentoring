@@ -6,7 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserRequestDto {
-    private String email;
-    private String password;
-    private String username;
+
+  private String email;
+  private String password;
+  private String username;
 }

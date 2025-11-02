@@ -1,6 +1,11 @@
 package com.jihuni.backend_mentoring.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,19 +15,19 @@ import lombok.Setter;
 @Table(name = "articles")
 public class Article {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long articleId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long articleId;
 
-    @Column(nullable = false)
-    private String email;
+  @Column(nullable = false)
+  private String email;
 
-    @Column(nullable = false)
-    private String password;
+  @Column(nullable = false)
+  private String password;
 
-    @Column(nullable = false)
-    private String title;
+  @Column(nullable = false)
+  private String title;
 
-    @Column(nullable = false)
-    private String content;
+  @Column(nullable = false)
+  private String content;
 }
