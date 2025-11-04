@@ -1,25 +1,22 @@
+
 package com.jihuni.backend_mentoring.business.article;
 
 import com.jihuni.backend_mentoring.business.user.PasswordEncryptor;
 import com.jihuni.backend_mentoring.dataaccess.article.ArticleRepository;
 import com.jihuni.backend_mentoring.dataaccess.user.UserRepository;
-import com.jihuni.backend_mentoring.dto.ArticleRequestDto;
-import com.jihuni.backend_mentoring.dto.ArticleResponseDto;
-import org.springframework.stereotype.Service;
+import com.jihuni.backend_mentoring.presentation.article.dto.ArticleRequestDto;
+import com.jihuni.backend_mentoring.presentation.article.dto.ArticleResponseDto;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ArticleService {
 
   private final ArticleRepository articleRepository;
   private final UserRepository userRepository;
   private final PasswordEncryptor passwordEncryptor;
-
-  public ArticleService(ArticleRepository articleRepository, UserRepository userRepository, PasswordEncryptor passwordEncryptor) {
-    this.articleRepository = articleRepository;
-    this.userRepository = userRepository;
-    this.passwordEncryptor = passwordEncryptor;
-  }
 
   public ArticleResponseDto createArticle(ArticleRequestDto dto) {
     var encodedPw = passwordEncryptor.encode(dto.getPassword());
@@ -34,6 +31,10 @@ public class ArticleService {
 
     var user = userRepository.findByEmail(dto.getEmail())
         .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다."));
+
+    if (!passwordEncryptor.matches(dto.getPassword(), user.getPassword())) {
+      throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+    }
 
     article.validateOwner(user.getEmail());
     article.update(dto.getTitle(), dto.getContent());

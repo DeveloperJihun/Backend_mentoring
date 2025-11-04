@@ -1,3 +1,4 @@
+
 package com.jihuni.backend_mentoring.business.article;
 
 import jakarta.persistence.*;
@@ -8,8 +9,7 @@ import lombok.Getter;
 @Table(name = "articles")
 public class Article {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long articleId;
 
   private String email;

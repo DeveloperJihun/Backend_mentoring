@@ -1,12 +1,18 @@
+
 package com.jihuni.backend_mentoring.presentation.article;
 
-import com.jihuni.backend_mentoring.dto.ArticleRequestDto;
-import com.jihuni.backend_mentoring.dto.ArticleResponseDto;
-import com.jihuni.backend_mentoring.service.ArticleService;
+import com.jihuni.backend_mentoring.business.article.ArticleService;
+import com.jihuni.backend_mentoring.presentation.article.dto.ArticleRequestDto;
+import com.jihuni.backend_mentoring.presentation.article.dto.ArticleResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,20 +21,15 @@ public class ArticleController {
 
     private final ArticleService articleService;
 
-    // 게시글 작성: POST /article
     @PostMapping
-    public ResponseEntity<ArticleResponseDto> createArticle(
-            @Valid @RequestBody ArticleRequestDto requestDto) {
-        ArticleResponseDto responseDto = articleService.createArticle(requestDto);
-        return ResponseEntity.ok(responseDto);
+    public ResponseEntity<ArticleResponseDto> createArticle(@Valid @RequestBody ArticleRequestDto requestDto) {
+        return ResponseEntity.ok(articleService.createArticle(requestDto));
     }
 
-    // 게시글 수정: PUT /article/update/{id}
     @PutMapping("/update/{id}")
     public ResponseEntity<ArticleResponseDto> updateArticle(
             @PathVariable Long id,
             @Valid @RequestBody ArticleRequestDto requestDto) {
-        ArticleResponseDto responseDto = articleService.updateArticle(id, requestDto);
-        return ResponseEntity.ok(responseDto);
+        return ResponseEntity.ok(articleService.updateArticle(id, requestDto));
     }
 }

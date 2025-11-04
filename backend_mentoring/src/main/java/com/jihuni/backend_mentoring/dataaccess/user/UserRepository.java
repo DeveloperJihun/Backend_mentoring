@@ -1,10 +1,11 @@
 package com.jihuni.backend_mentoring.dataaccess.user;
 
 import com.jihuni.backend_mentoring.business.user.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository {
+import java.util.Optional;
 
-  User save(User user);
-
+public interface UserRepository extends JpaRepository<User, Long> {
   boolean existsByEmail(String email);
+  Optional<User> findByEmail(String email);
 }
